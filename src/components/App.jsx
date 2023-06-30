@@ -55,7 +55,19 @@ if (contactIsList) {
       contact.name.toLowerCase().includes(seekLetterOfFilter)
     );
   };
+  componentDidMount() {
+  const fiedContacts = localStorage.getItem('contacts');
+    const contacts = JSON.parse(fiedContacts) ?? [];
 
+    this.setState({ contacts });  console.log("змонтовано")
+  }
+  componentDidUpdate(prevProps, prevState) {
+   
+ if (prevState.contacts.length !== this.state.contacts.length) {
+      const fiedContacts = JSON.stringify(this.state.contacts);
+      localStorage.setItem('contacts', fiedContacts);
+    }
+  }
 
   render()  {
 
